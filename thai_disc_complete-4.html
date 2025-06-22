@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบประเมินบุคลิกภาพ DISC - ค้นพบรูปแบบการทำงานของคุณ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e40af 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #666;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: rgba(0,0,0,0.2);
+            transform: scale(1.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #1d4ed8, #3b82f6);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1em;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .intro-text {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .disc-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .disc-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8f9fa;
+        }
+
+        .disc-item.d { border-left: 4px solid #e74c3c; }
+        .disc-item.i { border-left: 4px solid #f39c12; }
+        .disc-item.s { border-left: 4px solid #2ecc71; }
+        .disc-item.c { border-left: 4px solid #3498db; }
+
+        .animal-icon {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .disc-letter {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .disc-name {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 25px auto 0;
+            font-family: 'Kanit', sans-serif;
+            touch-action: manipulation;
+            min-height: 50px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 15px;
+            height: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .question-counter {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            line-height: 1.3;
+        }
+
+        .scenario-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .scenario-description {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:active {
+            transform: scale(0.98);
+        }
+
+        .option.selected {
+            border-color: #1d4ed8;
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .option-letter {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option.selected .option-letter {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .option-text {
+            font-size: 0.95em;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 25px auto 0;
+            font-family: 'Kanit', sans-serif;
+            touch-action: manipulation;
+            min-height: 50px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-container {
+            text-align: center;
+        }
+
+        .disc-chart {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .disc-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .bar-container {
+            width: 50px;
+            height: 150px;
+            background: #ecf0f1;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-radius: 25px;
+            transition: height 1s ease;
+        }
+
+        .bar-d { background: linear-gradient(to top, #e74c3c, #c0392b); }
+        .bar-i { background: linear-gradient(to top, #f39c12, #e67e22); }
+        .bar-s { background: linear-gradient(to top, #2ecc71, #27ae60); }
+        .bar-c { background: linear-gradient(to top, #3498db, #2980b9); }
+
+        .bar-animal {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+
+        .bar-label {
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 8px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .bar-percentage {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+
+        .primary-type {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .primary-animal {
+            font-size: 4em;
+            margin: 15px 0;
+        }
+
+        .primary-type h3 {
+            font-size: 1.6em;
+            margin-bottom: 12px;
+        }
+
+        .type-description {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .trait-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .trait-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .trait-card h4 {
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .trait-card p {
+            font-size: 0.85em;
+            line-height: 1.3;
+        }
+
+        .characteristics-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .characteristics-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .characteristic-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .characteristic-icon {
+            font-size: 1.2em;
+            margin-right: 12px;
+            width: 30px;
+        }
+
+        .save-result-btn {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 10px;
+            font-family: 'Kanit', sans-serif;
+            touch-action: manipulation;
+            min-height: 50px;
+        }
+
+        .save-result-btn:active {
+            transform: scale(0.98);
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 10px;
+            font-family: 'Kanit', sans-serif;
+            touch-action: manipulation;
+            min-height: 50px;
+        }
+
+        .restart-btn:active {
+            transform: scale(0.98);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .celebration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container { 
+                padding: 15px;
+                margin: 5px;
+                border-radius: 15px;
+            }
+            h1 { 
+                font-size: 1.6em; 
+                margin-bottom: 5px;
+            }
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+            .intro-section {
+                padding: 20px;
+            }
+            .disc-preview {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .animal-icon {
+                font-size: 2em;
+            }
+            .scenario-card {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+            .scenario-title {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+            .scenario-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+                margin-right: 10px;
+            }
+            .scenario-description {
+                font-size: 0.95em;
+                margin-bottom: 15px;
+            }
+            .options-grid { 
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .option {
+                padding: 14px;
+                min-height: 55px;
+            }
+            .option-text {
+                font-size: 0.9em;
+            }
+            .disc-chart { 
+                justify-content: center;
+                gap: 8px;
+                margin: 15px 0;
+            }
+            .disc-bar {
+                margin: 3px;
+            }
+            .bar-container {
+                width: 45px;
+                height: 120px;
+            }
+            .bar-label {
+                font-size: 0.9em;
+                margin-top: 6px;
+            }
+            .bar-percentage {
+                font-size: 0.8em;
+            }
+            .primary-type {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .primary-type h3 {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+            .primary-animal {
+                font-size: 3em;
+                margin: 10px 0;
+            }
+            .type-description {
+                font-size: 0.95em;
+                margin-bottom: 12px;
+            }
+            .traits-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-top: 15px;
+            }
+            .trait-card {
+                padding: 12px;
+            }
+            .trait-icon {
+                font-size: 1.3em;
+                margin-bottom: 6px;
+            }
+            .trait-card h4 {
+                font-size: 0.9em;
+                margin-bottom: 4px;
+            }
+            .trait-card p {
+                font-size: 0.8em;
+            }
+            .btn, .start-btn, .save-result-btn, .restart-btn {
+                padding: 14px 24px;
+                font-size: 1em;
+                margin: 20px auto 0;
+                width: 100%;
+                max-width: none;
+            }
+            .save-result-btn, .restart-btn {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            .container {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .subtitle {
+                font-size: 0.85em;
+            }
+            .logo {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            .intro-section {
+                padding: 15px;
+            }
+            .disc-preview {
+                grid-template-columns: 1fr 1fr;
+            }
+            .scenario-card {
+                padding: 12px;
+            }
+            .scenario-title {
+                font-size: 1em;
+                flex-direction: column;
+                text-align: center;
+            }
+            .scenario-icon {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            .scenario-description {
+                font-size: 0.9em;
+            }
+            .option {
+                padding: 12px;
+                min-height: 50px;
+            }
+            .option-letter {
+                width: 25px;
+                height: 25px;
+                font-size: 1em;
+                margin-right: 10px;
+            }
+            .option-text {
+                font-size: 0.85em;
+            }
+            .bar-container {
+                width: 40px;
+                height: 100px;
+            }
+            .progress-container {
+                margin-bottom: 20px;
+                height: 10px;
+            }
+            .question-counter {
+                margin-bottom: 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .container {
+                -webkit-overflow-scrolling: touch;
+            }
+            .option {
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="close-btn" onclick="assessment.closePage()">&times;</button>
+        
+        <div class="header">
+            <div class="logo">D</div>
+            <h1>ค้นพบรูปแบบการทำงานของคุณ</h1>
+            <p class="subtitle">แบบประเมินบุคลิกภาพ DISC แบบครอบคลุม</p>
+        </div>
+
+    <script>
+        class ThaiDISCAssessment {
+            constructor() {
+                this.currentQuestion = 0;
+                this.scores = { D: 0, I: 0, S: 0, C: 0 };
+                this.totalQuestions = 20;
+                this.selectedOption = null;
+                this.userAnswers = [];
+                
+                this.questions = [
+                    {
+                        icon: "🎯",
+                        color: "#e74c3c",
+                        title: "การจัดการภายใต้ความกดดัน",
+                        scenario: "เมื่อเผชิญกับโปรเจคที่มีกำหนดเวลาเร่งด่วนและแรงกดดันสูง คุณมักจะตอบสนองอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "รับผิดชอบทันทีและตัดสินใจอย่างรวดเร็วเพื่อให้ได้ผลลัพธ์", type: "D" },
+                            { letter: "ข", text: "ใช้ความกระตือรือร้นและความคิดสร้างสรรค์เพื่อหาทางออก", type: "I" },
+                            { letter: "ค", text: "สร้างแผนงานที่มั่นคงและสนับสนุนทีมผ่านความเครียด", type: "S" },
+                            { letter: "ง", text: "วิเคราะห์สถานการณ์อย่างรอบคอบและวางแผนอย่างเป็นระบบ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "💬",
+                        color: "#f39c12",
+                        title: "สไตล์การสื่อสารในที่ทำงาน",
+                        scenario: "ในการประชุมหรือการนำเสนอ รูปแบบการสื่อสารที่คุณชอบมากที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "พูดตรงประเด็น ชัดเจน และมุ่งเน้นผลลัพธ์", type: "D" },
+                            { letter: "ข", text: "ใช้เรื่องราวและอารมณ์ขันเพื่อดึงดูดความสนใจ", type: "I" },
+                            { letter: "ค", text: "ฟังความคิดเห็นของทุกคนและพยายามสร้างฉันทามติ", type: "S" },
+                            { letter: "ง", text: "นำเสนอข้อมูลและข้อเท็จจริงอย่างละเอียดและแม่นยำ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "⚡",
+                        color: "#9b59b6",
+                        title: "การแก้ไขปัญหาความขัดแย้ง",
+                        scenario: "เมื่อเกิดความขัดแย้งในทีม คุณมักจะเลือกวิธีการจัดการอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "เผชิญหน้าและแก้ไขปัญหาโดยตรงอย่างรวดเร็ว", type: "D" },
+                            { letter: "ข", text: "พยายามสร้างบรรยากาศที่ดีและหาจุดร่วมที่ทุกคนเห็นด้วย", type: "I" },
+                            { letter: "ค", text: "รับฟังทุกฝ่ายและหาทางประนีประนอมที่เป็นธรรม", type: "S" },
+                            { letter: "ง", text: "รวบรวมข้อเท็จจริงและใช้ข้อมูลในการตัดสินใจ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🚀",
+                        color: "#2ecc71",
+                        title: "การตอบสนองต่อการเปลี่ยนแปลง",
+                        scenario: "เมื่อองค์กรประกาศการเปลี่ยนแปลงใหญ่ ปฏิกิริยาแรกของคุณมักจะเป็นอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "รู้สึกตื่นเต้นและพร้อมที่จะนำการเปลี่ยนแปลง", type: "D" },
+                            { letter: "ข", text: "มองหาโอกาสใหม่และแชร์ความตื่นเต้นกับคนอื่น", type: "I" },
+                            { letter: "ค", text: "ต้องการเวลาในการปรับตัวและเข้าใจผลกระทบ", type: "S" },
+                            { letter: "ง", text: "ต้องการข้อมูลรายละเอียดเพื่อประเมินความเสี่ยง", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎭",
+                        color: "#e67e22",
+                        title: "การทำงานเป็นทีม",
+                        scenario: "ในโปรเจคกลุ่ม บทบาทที่คุณมักจะรับผิดชอบคือ?",
+                        options: [
+                            { letter: "ก", text: "ผู้นำที่กำหนดทิศทางและตัดสินใจสำคัญ", type: "D" },
+                            { letter: "ข", text: "ผู้สร้างแรงบันดาลใจและเชื่อมโยงสมาชิก", type: "I" },
+                            { letter: "ค", text: "ผู้สนับสนุนและช่วยให้ทุกคนทำงานร่วมกันได้", type: "S" },
+                            { letter: "ง", text: "ผู้วิเคราะห์และควบคุมคุณภาพของงาน", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "📊",
+                        color: "#3498db",
+                        title: "การตัดสินใจ",
+                        scenario: "เมื่อต้องตัดสินใจเรื่องสำคัญ กระบวนการที่คุณใช้คือ?",
+                        options: [
+                            { letter: "ก", text: "ตัดสินใจเร็วตามสัญชาตญาณและประสบการณ์", type: "D" },
+                            { letter: "ข", text: "ปรึกษาผู้อื่นและพิจารณาผลกระทบต่อคน", type: "I" },
+                            { letter: "ค", text: "ใช้เวลาคิดและประเมินทางเลือกอย่างรอบคอบ", type: "S" },
+                            { letter: "ง", text: "รวบรวมข้อมูลทั้งหมดและวิเคราะห์อย่างละเอียด", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "💡",
+                        color: "#f1c40f",
+                        title: "การจัดการเวลา",
+                        scenario: "วิธีการจัดการเวลาและงานที่คุณชอบมากที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "เน้นงานที่สำคัญที่สุดและทำให้เสร็จก่อน", type: "D" },
+                            { letter: "ข", text: "สลับไปมาระหว่างงานต่างๆ ตามแรงบันดาลใจ", type: "I" },
+                            { letter: "ค", text: "ทำงานอย่างสม่ำเสมอและมีระเบียบ", type: "S" },
+                            { letter: "ง", text: "วางแผนละเอียดและติดตามความคืบหน้า", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎪",
+                        color: "#e74c3c",
+                        title: "การรับมือกับความเครียด",
+                        scenario: "เมื่อรู้สึกเครียดจากงาน คุณมักจะจัดการอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "เผชิญหน้ากับปัญหาและแก้ไขทันที", type: "D" },
+                            { letter: "ข", text: "คุยกับเพื่อนร่วมงานหรือหาสิ่งที่ทำให้ผ่อนคลาย", type: "I" },
+                            { letter: "ค", text: "หาเวลาพักผ่อนและทำกิจกรรมที่ชอบ", type: "S" },
+                            { letter: "ง", text: "วิเคราะห์สาเหตุและจัดทำแผนการแก้ไข", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🏆",
+                        color: "#27ae60",
+                        title: "แรงจูงใจในการทำงาน",
+                        scenario: "สิ่งที่กระตุ้นให้คุณทำงานอย่างเต็มที่มากที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "ความท้าทายและโอกาสในการนำทีม", type: "D" },
+                            { letter: "ข", text: "การได้รับการยอมรับและมีปฏิสัมพันธ์ที่ดี", type: "I" },
+                            { letter: "ค", text: "ความมั่นคงและสภาพแวดล้อมที่เป็นมิตร", type: "S" },
+                            { letter: "ง", text: "ความเป็นเลิศและโอกาสในการเรียนรู้", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎨",
+                        color: "#9b59b6",
+                        title: "รูปแบบการเรียนรู้",
+                        scenario: "เมื่อต้องเรียนรู้ทักษะใหม่ วิธีที่คุณชอบมากที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "ทดลองทำและเรียนรู้จากการปฏิบัติจริง", type: "D" },
+                            { letter: "ข", text: "เรียนรู้ผ่านการสนทนาและแลกเปลี่ยนประสบการณ์", type: "I" },
+                            { letter: "ค", text: "เรียนรู้ทีละขั้นตอนอย่างเป็นระบบ", type: "S" },
+                            { letter: "ง", text: "ศึกษาทฤษฎีและรายละเอียดก่อนปฏิบัติ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🌟",
+                        color: "#f39c12",
+                        title: "การให้ข้อเสนอแนะ",
+                        scenario: "เมื่อต้องให้ข้อเสนอแนะแก่เพื่อนร่วมงาน คุณมักจะ?",
+                        options: [
+                            { letter: "ก", text: "พูดตรงไปตรงมาและชี้จุดที่ต้องปรับปรุง", type: "D" },
+                            { letter: "ข", text: "เริ่มจากสิ่งที่ดีแล้วค่อยแนะนำสิ่งที่ควรปรับปรุง", type: "I" },
+                            { letter: "ค", text: "หาโอกาสที่เหมาะสมและพูดอย่างนุ่มนวล", type: "S" },
+                            { letter: "ง", text: "เตรียมข้อมูลและตัวอย่างที่ชัดเจนมาประกอบ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🚗",
+                        color: "#e67e22",
+                        title: "การวางแผนการเดินทาง",
+                        scenario: "เมื่อวางแผนเดินทางท่องเที่ยว คุณชอบวิธีไหนมากที่สุด?",
+                        options: [
+                            { letter: "ก", text: "กำหนดจุดหมายหลักและเดินทางตามใจชอบ", type: "D" },
+                            { letter: "ข", text: "ไปตามที่เพื่อนแนะนำและเปิดรับประสบการณ์ใหม่", type: "I" },
+                            { letter: "ค", text: "เลือกสถานที่ที่คุ้นเคยและมีความปลอดภัย", type: "S" },
+                            { letter: "ง", text: "วางแผนละเอียดทุกรายการและเตรียมการอย่างครบถ้วน", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "📱",
+                        color: "#3498db",
+                        title: "การใช้เทคโนโลยี",
+                        scenario: "เมื่อมีเทคโนโลยีใหม่เข้ามา ปฏิกิริยาของคุณมักจะเป็นอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "ทดลองใช้ทันทีเพื่อหาประโยชน์ในการทำงาน", type: "D" },
+                            { letter: "ข", text: "สนใจและชอบแบ่งปันประสบการณ์การใช้งาน", type: "I" },
+                            { letter: "ค", text: "รอให้มีการพิสูจน์ความเสถียรก่อนใช้", type: "S" },
+                            { letter: "ง", text: "ศึกษาคุณสมบัติและข้อจำกัดอย่างละเอียด", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎯",
+                        color: "#2ecc71",
+                        title: "การตั้งเป้าหมาย",
+                        scenario: "วิธีการตั้งเป้าหมายที่คุณใช้บ่อยที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "ตั้งเป้าหมายใหญ่และท้าทายตัวเอง", type: "D" },
+                            { letter: "ข", text: "ตั้งเป้าหมายที่สร้างแรงบันดาลใจให้กับตัวเองและผู้อื่น", type: "I" },
+                            { letter: "ค", text: "ตั้งเป้าหมายที่สมจริงและทำได้จริง", type: "S" },
+                            { letter: "ง", text: "ตั้งเป้าหมายที่วัดผลได้และมีขั้นตอนชัดเจน", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "💼",
+                        color: "#34495e",
+                        title: "สภาพแวดล้อมการทำงาน",
+                        scenario: "สภาพแวดล้อมการทำงานที่คุณต้องการมากที่สุดคือ?",
+                        options: [
+                            { letter: "ก", text: "สถานที่ที่ให้อิสระในการตัดสินใจและมีความท้าทาย", type: "D" },
+                            { letter: "ข", text: "บรรยากาศที่เป็นมิตรและมีการสื่อสารที่ดี", type: "I" },
+                            { letter: "ค", text: "สภาพแวดล้อมที่มีความมั่นคงและเป็นระเบียบ", type: "S" },
+                            { letter: "ง", text: "พื้นที่ทำงานที่เงียบสงบและมีระบบที่ชัดเจน", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🤝",
+                        color: "#e74c3c",
+                        title: "การสร้างความสัมพันธ์",
+                        scenario: "ในการสร้างความสัมพันธ์ใหม่ คุณมักจะ?",
+                        options: [
+                            { letter: "ก", text: "เข้าหาคนที่มีความสามารถและมีประโยชน์ต่องาน", type: "D" },
+                            { letter: "ข", text: "เปิดใจและสร้างมิตรภาพอย่างง่ายดาย", type: "I" },
+                            { letter: "ค", text: "ใช้เวลาในการสร้างความไว้วางใจอย่างค่อยเป็นค่อยไป", type: "S" },
+                            { letter: "ง", text: "เลือกคบหาสมาคมกับคนที่มีความคิดคล้ายกัน", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "📈",
+                        color: "#27ae60",
+                        title: "การประเมินความสำเร็จ",
+                        scenario: "คุณใช้เกณฑ์ใดในการวัดความสำเร็จของตัวเอง?",
+                        options: [
+                            { letter: "ก", text: "ผลลัพธ์ที่ได้และการบรรลุเป้าหมาย", type: "D" },
+                            { letter: "ข", text: "การได้รับการยอมรับและความพึงพอใจของผู้อื่น", type: "I" },
+                            { letter: "ค", text: "ความสมดุลในชีวิตและความสุขส่วนตัว", type: "S" },
+                            { letter: "ง", text: "คุณภาพของงานและความแม่นยำ", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎪",
+                        color: "#9b59b6",
+                        title: "การจัดการกับความผิดพลาด",
+                        scenario: "เมื่อเกิดความผิดพลาดในงาน คุณมักจะทำอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "รับผิดชอบและหาทางแก้ไขอย่างรวดเร็ว", type: "D" },
+                            { letter: "ข", text: "พูดคุยกับทีมเพื่อหาทางออกร่วมกัน", type: "I" },
+                            { letter: "ค", text: "ยอมรับความผิดพลาดและเรียนรู้จากประสบการณ์", type: "S" },
+                            { letter: "ง", text: "วิเคราะห์สาเหตุเพื่อป้องกันไม่ให้เกิดขึ้นอีก", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🌈",
+                        color: "#f39c12",
+                        title: "การมองโลกในแง่ดี",
+                        scenario: "เมื่อเผชิญกับสถานการณ์ที่ท้าทาย คุณมักจะคิดอย่างไร?",
+                        options: [
+                            { letter: "ก", text: "เห็นโอกาสในการพิสูจน์ความสามารถของตัวเอง", type: "D" },
+                            { letter: "ข", text: "เชื่อว่าทุกอย่างจะดีขึ้นและมองหาด้านบวก", type: "I" },
+                            { letter: "ค", text: "พึ่งพาคนรอบข้างและรอให้สถานการณ์ผ่านไป", type: "S" },
+                            { letter: "ง", text: "วิเคราะห์ปัญหาและเตรียมแผนสำรองไว้", type: "C" }
+                        ]
+                    },
+                    {
+                        icon: "🎭",
+                        color: "#e67e22",
+                        title: "การแสดงออกทางอารมณ์",
+                        scenario: "ในที่ทำงาน คุณมักจะแสดงอารมณ์อย่างไร?",
+                        options: [
+                            { letter: "ก", text: "แสดงออกอย่างตรงไปตรงมาเมื่อรู้สึกไม่พอใจ", type: "D" },
+                            { letter: "ข", text: "แสดงความรู้สึกอย่างเปิดเผยและเป็นธรรมชาติ", type: "I" },
+                            { letter: "ค", text: "ควบคุมอารมณ์และไม่ชอบแสดงออกในที่สาธารณะ", type: "S" },
+                            { letter: "ง", text: "รักษาความเป็นมืออาชีพและแสดงออกอย่างเหมาะสม", type: "C" }
+                        ]
+                    }
+                ];
+
+                this.discProfiles = {
+                    D: {
+                        name: "ความเด็ดขาด",
+                        animal: "🐂",
+                        color: "#e74c3c",
+                        title: "กระทิง - ผู้นำที่เด็ดขาด",
+                        description: "คุณเป็นคนที่มีความเด็ดขาดและชอบการท้าทาย มักจะเป็นผู้นำที่แข็งแกร่งและตัดสินใจได้อย่างรวดเร็ว",
+                        traits: [
+                            { icon: "⚡", title: "เด็ดขาด", desc: "ตัดสินใจเร็วและแน่วแน่" },
+                            { icon: "🎯", title: "มุ่งเป้า", desc: "มุ่งมั่นไปสู่เป้าหมาย" },
+                            { icon: "💪", title: "แข็งแกร่ง", desc: "เผชิญความท้าทายได้ดี" },
+                            { icon: "👑", title: "ผู้นำ", desc: "มีความสามารถในการนำ" }
+                        ],
+                        characteristics: [
+                            { icon: "✅", text: "ชอบควบคุมและมีอำนาจตัดสินใจ" },
+                            { icon: "⚡", text: "ทำงานได้เร็วและมีประสิทธิภาพ" },
+                            { icon: "🎯", text: "มุ่งเน้นผลงานและความสำเร็จ" },
+                            { icon: "🚀", text: "กล้าเสี่ยงและยอมรับความท้าทาย" },
+                            { icon: "💼", text: "เป็นนักแก้ปัญหาที่ดี" }
+                        ]
+                    },
+                    I: {
+                        name: "อิทธิพล",
+                        animal: "🦅",
+                        color: "#f39c12",
+                        title: "นกอินทรีย์ - ผู้สร้างแรงบันดาลใจ",
+                        description: "คุณเป็นคนที่มีเสน่ห์และสามารถโน้มน้าวใจผู้อื่นได้ดี ชอบการมีปฏิสัมพันธ์และสร้างแรงบันดาลใจ",
+                        traits: [
+                            { icon: "✨", title: "เสน่ห์", desc: "ดึงดูดและโน้มน้าวได้ดี" },
+                            { icon: "🎤", title: "สื่อสาร", desc: "พูดเก่งและน่าฟัง" },
+                            { icon: "🌟", title: "แรงบันดาลใจ", desc: "สร้างแรงจูงใจให้ผู้อื่น" },
+                            { icon: "🤝", title: "เข้าสังคม", desc: "สร้างสัมพันธ์ได้ง่าย" }
+                        ],
+                        characteristics: [
+                            { icon: "🎭", text: "ชอบเป็นจุดสนใจและได้รับการยอมรับ" },
+                            { icon: "💬", text: "สื่อสารได้ดีและมีความคิดสร้างสรรค์" },
+                            { icon: "🌈", text: "มองโลกในแง่ดีและมีพลังบวก" },
+                            { icon: "🎪", text: "ชอบความหลากหลายและสิ่งใหม่ๆ" },
+                            { icon: "👥", text: "ทำงานเป็นทีมได้ดีและสร้างแรงบันดาลใจ" }
+                        ]
+                    },
+                    S: {
+                        name: "ผู้รักความสงบ",
+                        animal: "🐭",
+                        color: "#2ecc71",
+                        title: "หนู - ผู้รักความสงบและมั่นคง",
+                        description: "คุณเป็นคนที่รักความสงบและชอบความมั่นคง มีความเป็นมิตรและให้ความสำคัญกับความสัมพันธ์",
+                        traits: [
+                            { icon: "🕊️", title: "สงบ", desc: "รักความสงบและปรองดอง" },
+                            { icon: "🤝", title: "เป็นมิตร", desc: "ใจดีและช่วยเหลือผู้อื่น" },
+                            { icon: "🛡️", title: "มั่นคง", desc: "ชอบความมั่นคงและปลอดภัย" },
+                            { icon: "💝", title: "ใส่ใจ", desc: "ใส่ใจและเอาใจใส่ผู้อื่น" }
+                        ],
+                        characteristics: [
+                            { icon: "🏠", text: "ชอบความมั่นคงและสภาพแวดล้อมที่คุ้นเคย" },
+                            { icon: "🤝", text: "เป็นคนอดทนและให้ความร่วมมือดี" },
+                            { icon: "👂", text: "เป็นผู้ฟังที่ดีและเข้าใจความรู้สึกผู้อื่น" },
+                            { icon: "⚖️", text: "ชอบความยุติธรรมและความเป็นธรรม" },
+                            { icon: "🌱", text: "ปรับตัวช้าแต่มั่นคงเมื่อเปลี่ยนแปลง" }
+                        ]
+                    },
+                    C: {
+                        name: "ความรอบคอบ",
+                        animal: "🐻",
+                        color: "#3498db",
+                        title: "หมี - ผู้รอบคอบและแม่นยำ",
+                        description: "คุณเป็นคนที่รอบคอบและใส่ใจในรายละเอียด มักจะวิเคราะห์อย่างลึกซึ้งและทำงานอย่างมีระบบ",
+                        traits: [
+                            { icon: "🔍", title: "รอบคอบ", desc: "พิจารณาทุกรายละเอียด" },
+                            { icon: "📊", title: "วิเคราะห์", desc: "วิเคราะห์ข้อมูลอย่างลึกซึ้ง" },
+                            { icon: "🎯", title: "แม่นยำ", desc: "ทำงานอย่างแม่นยำและถูกต้อง" },
+                            { icon: "📚", title: "ระบบ", desc: "ทำงานอย่างเป็นระบบ" }
+                        ],
+                        characteristics: [
+                            { icon: "🔍", text: "ชอบวิเคราะห์และหาข้อเท็จจริง" },
+                            { icon: "📏", text: "ให้ความสำคัญกับคุณภาพและมาตรฐาน" },
+                            { icon: "🧠", text: "คิดอย่างเป็นระบบและมีเหตุผล" },
+                            { icon: "⏰", text: "วางแผนและจัดการเวลาได้ดี" },
+                            { icon: "🎓", text: "ชอบเรียนรู้และพัฒนาตัวเอง" }
+                        ]
+                    },
+                    BALANCED: {
+                        name: "บุคลิกภาพสมดุล",
+                        animal: "🦄",
+                        color: "#1d4ed8",
+                        title: "ยูนิคอร์น - บุคลิกภาพที่สมดุลสมบูรณ์",
+                        description: "คุณเป็นคนที่มีบุคลิกภาพที่สมดุลอย่างน่าทึ่ง! คุณสามารถปรับตัวและใช้ลักษณะของทุกประเภทได้ตามสถานการณ์ที่เหมาะสม",
+                        traits: [
+                            { icon: "⚖️", title: "สมดุล", desc: "มีความสมดุลในทุกด้าน" },
+                            { icon: "🎭", title: "ปรับตัว", desc: "ปรับตัวได้ตามสถานการณ์" },
+                            { icon: "🌈", title: "หลากหลาย", desc: "มีความสามารถหลากหลาย" },
+                            { icon: "🔄", title: "ยืดหยุ่น", desc: "ยืดหยุ่นและรอบด้าน" }
+                        ],
+                        characteristics: [
+                            { icon: "🎯", text: "สามารถเป็นผู้นำได้เมื่อจำเป็น (D)" },
+                            { icon: "💬", text: "สื่อสารและสร้างแรงบันดาลใจได้ดี (I)" },
+                            { icon: "🤝", text: "ให้ความร่วมมือและรักสงบ (S)" },
+                            { icon: "🔍", text: "วิเคราะห์และทำงานอย่างรอบคอบ (C)" },
+                            { icon: "⭐", text: "เป็นคนที่หายากและมีคุณค่าในทีม" }
+                        ]
+                    }
+                };
+            }
+
+            startAssessment() {
+                document.getElementById('introSection').classList.add('hidden');
+                document.getElementById('assessmentSection').classList.remove('hidden');
+                this.showQuestion();
+            }
+
+            showQuestion() {
+                const question = this.questions[this.currentQuestion];
+                const container = document.getElementById('assessmentContainer');
+                const counter = document.getElementById('questionCounter');
+                const progressBar = document.getElementById('progressBar');
+
+                counter.textContent = `คำถามที่ ${this.currentQuestion + 1} จาก ${this.totalQuestions}`;
+                progressBar.style.width = `${((this.currentQuestion + 1) / this.totalQuestions) * 100}%`;
+
+                // Randomize options order while keeping track of correct types
+                const shuffledOptions = [...question.options];
+                this.shuffleArray(shuffledOptions);
+                
+                // Assign new letters ก, ข, ค, ง to shuffled options
+                const letters = ['ก', 'ข', 'ค', 'ง'];
+                shuffledOptions.forEach((option, index) => {
+                    option.displayLetter = letters[index];
+                });
+
+                container.innerHTML = `
+                    <div class="scenario-card fade-in">
+                        <div class="scenario-title">
+                            <div class="scenario-icon" style="background: ${question.color}20; color: ${question.color};">
+                                ${question.icon}
+                            </div>
+                            ${question.title}
+                        </div>
+                        <div class="scenario-description">
+                            ${question.scenario}
+                        </div>
+                        <div class="options-grid">
+                            ${shuffledOptions.map(option => `
+                                <div class="option" onclick="assessment.selectOption('${option.type}', this)">
+                                    <div class="option-letter">${option.displayLetter}</div>
+                                    <div class="option-text">${option.text}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="btn" id="nextBtn" onclick="assessment.nextQuestion()" disabled>
+                            ${this.currentQuestion < this.totalQuestions - 1 ? 'คำถามต่อไป' : 'ดูผลลัพธ์'}
+                        </button>
+                    </div>
+                `;
+
+                this.selectedOption = null;
+            }
+
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            selectOption(type, element) {
+                // Remove previous selection
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selection to clicked option
+                element.classList.add('selected');
+                this.selectedOption = type;
+
+                // Enable next button
+                document.getElementById('nextBtn').disabled = false;
+            }
+
+            nextQuestion() {
+                if (!this.selectedOption) return;
+
+                // Record answer
+                this.userAnswers.push({
+                    question: this.currentQuestion,
+                    answer: this.selectedOption
+                });
+
+                // Update scores
+                this.scores[this.selectedOption]++;
+
+                this.currentQuestion++;
+
+                if (this.currentQuestion < this.totalQuestions) {
+                    this.showQuestion();
+                } else {
+                    this.showResults();
+                }
+            }
+
+            showResults() {
+                document.getElementById('assessmentSection').classList.add('hidden');
+                document.getElementById('resultsContainer').classList.remove('hidden');
+
+                this.calculateResults();
+                this.displayResults();
+                this.addCelebration();
+            }
+
+            calculateResults() {
+                const total = Object.values(this.scores).reduce((a, b) => a + b, 0);
+                this.percentages = {};
+                
+                Object.keys(this.scores).forEach(type => {
+                    this.percentages[type] = Math.round((this.scores[type] / total) * 100);
+                });
+
+                // Find primary type - handle ties
+                const maxScore = Math.max(...Object.values(this.scores));
+                const typesWithMaxScore = Object.keys(this.scores).filter(type => this.scores[type] === maxScore);
+                
+                if (typesWithMaxScore.length === 1) {
+                    // Clear primary type
+                    this.primaryType = typesWithMaxScore[0];
+                    this.isBalanced = false;
+                } else if (typesWithMaxScore.length === 4) {
+                    // All types equal - perfectly balanced
+                    this.primaryType = 'BALANCED';
+                    this.isBalanced = true;
+                    this.balancedTypes = typesWithMaxScore;
+                } else {
+                    // Multiple types tied for highest - pick the first one but note it's tied
+                    this.primaryType = typesWithMaxScore[0];
+                    this.isBalanced = false;
+                    this.tiedTypes = typesWithMaxScore;
+                }
+            }
+
+            displayResults() {
+                this.displayChart();
+                this.displayPrimaryType();
+                this.displayCharacteristics();
+            }
+
+            displayChart() {
+                const chartContainer = document.getElementById('discChart');
+                const animals = { D: '🐂', I: '🦅', S: '🐭', C: '🐻' };
+                const colors = { D: 'bar-d', I: 'bar-i', S: 'bar-s', C: 'bar-c' };
+                const names = { 
+                    D: 'เด็ดขาด', 
+                    I: 'อิทธิพล', 
+                    S: 'ผู้รักความสงบ', 
+                    C: 'รอบคอบ' 
+                };
+
+                chartContainer.innerHTML = Object.keys(this.scores).map(type => `
+                    <div class="disc-bar">
+                        <div class="bar-animal">${animals[type]}</div>
+                        <div class="bar-container">
+                            <div class="bar-fill ${colors[type]}" style="height: ${this.percentages[type]}%"></div>
+                        </div>
+                        <div class="bar-label">${type}</div>
+                        <div class="bar-label">${names[type]}</div>
+                        <div class="bar-percentage">${this.percentages[type]}%</div>
+                    </div>
+                `).join('');
+            }
+
+            displayPrimaryType() {
+                const profile = this.discProfiles[this.primaryType];
+                const primaryContainer = document.getElementById('primaryType');
+
+                if (this.isBalanced) {
+                    // Show balanced personality message
+                    primaryContainer.innerHTML = `
+                        <div class="primary-animal">${profile.animal}</div>
+                        <h3>${profile.title}</h3>
+                        <div class="type-description">${profile.description}</div>
+                        <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                            <p><strong>🎉 ยินดีด้วย!</strong> คุณมีบุคลิกภาพที่สมดุลสมบูรณ์แบบ ซึ่งพบได้ยากมาก!</p>
+                            <p>คะแนนของคุณ: D=${this.percentages.D}%, I=${this.percentages.I}%, S=${this.percentages.S}%, C=${this.percentages.C}%</p>
+                        </div>
+                    `;
+                } else if (this.tiedTypes && this.tiedTypes.length > 1) {
+                    // Show tied types message
+                    const tiedNames = this.tiedTypes.map(type => this.discProfiles[type].name).join(', ');
+                    primaryContainer.innerHTML = `
+                        <div class="primary-animal">${profile.animal}</div>
+                        <h3>${profile.title}</h3>
+                        <div class="type-description">${profile.description}</div>
+                        <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                            <p><strong>📊 ผลลัพธ์เสมอกัน:</strong> คุณมีคุณลักษณะที่โดดเด่นใน ${tiedNames}</p>
+                            <p>คะแนนสูงสุด: ${this.tiedTypes.map(type => `${type}=${this.percentages[type]}%`).join(', ')}</p>
+                        </div>
+                    `;
+                } else {
+                    // Show normal single primary type
+                    primaryContainer.innerHTML = `
+                        <div class="primary-animal">${profile.animal}</div>
+                        <h3>${profile.title}</h3>
+                        <div class="type-description">${profile.description}</div>
+                    `;
+                }
+            }
+
+            displayCharacteristics() {
+                const profile = this.discProfiles[this.primaryType];
+                const characteristicsContainer = document.getElementById('characteristicsSection');
+                const traitsContainer = document.getElementById('traitsGrid');
+
+                characteristicsContainer.innerHTML = `
+                    <h3 class="characteristics-title">ลักษณะเด่นของคุณ</h3>
+                    ${profile.characteristics.map(char => `
+                        <div class="characteristic-item">
+                            <span class="characteristic-icon">${char.icon}</span>
+                            <span>${char.text}</span>
+                        </div>
+                    `).join('')}
+                `;
+
+                traitsContainer.innerHTML = profile.traits.map(trait => `
+                    <div class="trait-card">
+                        <div class="trait-icon">${trait.icon}</div>
+                        <h4>${trait.title}</h4>
+                        <p>${trait.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            addCelebration() {
+                const celebration = document.createElement('div');
+                celebration.className = 'celebration';
+                
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.backgroundColor = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'][Math.floor(Math.random() * 5)];
+                    celebration.appendChild(confetti);
+                }
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.remove();
+                }, 5000);
+            }
+
+            saveResults() {
+                // Remove save functionality - not needed
+                alert('ผลลัพธ์ของคุณได้รับการแสดงเรียบร้อยแล้ว!');
+            }
+
+            restartAssessment() {
+                if (confirm('คุณต้องการทำแบบประเมินใหม่หรือไม่? ข้อมูลปัจจุบันจะหายไป')) {
+                    this.currentQuestion = 0;
+                    this.scores = { D: 0, I: 0, S: 0, C: 0 };
+                    this.selectedOption = null;
+                    this.userAnswers = [];
+
+                    document.getElementById('resultsContainer').classList.add('hidden');
+                    document.getElementById('introSection').classList.remove('hidden');
+                }
+            }
+
+            closePage() {
+                if (confirm('คุณต้องการปิดหน้านี้หรือไม่?')) {
+                    window.close();
+                }
+            }
+        }
+
+        // Initialize assessment
+        const assessment = new ThaiDISCAssessment();
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '4') {
+                const options = document.querySelectorAll('.option');
+                const index = parseInt(e.key) - 1;
+                if (options[index]) {
+                    options[index].click();
+                }
+            } else if (e.key === 'Enter') {
+                const nextBtn = document.getElementById('nextBtn');
+                if (nextBtn && !nextBtn.disabled) {
+                    nextBtn.click();
+                }
+            }
+        });
+
+        // Prevent context menu on mobile
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 100);
+        });
+    </script>
+</body>
+</html>    <!-- Introduction Section -->
+        <div id="introSection" class="intro-section">
+            <h2 class="intro-title">เกี่ยวกับแบบประเมิน DISC</h2>
+            <p class="intro-text">
+                แบบประเมิน DISC เป็นเครื่องมือที่ได้รับการยอมรับในระดับสากลสำหรับการทำความเข้าใจบุคลิกภาพและรูปแบบการทำงาน โดยแบ่งบุคลิกภาพออกเป็น 4 ประเภทหลัก
+            </p>
+            
+            <div class="disc-preview">
+                <div class="disc-item d">
+                    <span class="animal-icon">🐂</span>
+                    <div class="disc-letter">D - ความเด็ดขาด</div>
+                    <div class="disc-name">กระทิง</div>
+                </div>
+                <div class="disc-item i">
+                    <span class="animal-icon">🦅</span>
+                    <div class="disc-letter">I - อิทธิพล</div>
+                    <div class="disc-name">นกอินทรีย์</div>
+                </div>
+                <div class="disc-item s">
+                    <span class="animal-icon">🐭</span>
+                    <div class="disc-letter">S - ผู้รักความสงบ</div>
+                    <div class="disc-name">หนู</div>
+                </div>
+                <div class="disc-item c">
+                    <span class="animal-icon">🐻</span>
+                    <div class="disc-letter">C - ความรอบคอบ</div>
+                    <div class="disc-name">หมี</div>
+                </div>
+            </div>
+
+            <p class="intro-text">
+                แบบประเมินนี้จะใช้เวลาประมาณ 10-15 นาที และจะช่วยให้คุณเข้าใจรูปแบบการทำงาน จุดแข็ง และวิธีการสื่อสารที่เหมาะสมกับคุณมากที่สุด
+            </p>
+
+            <button class="start-btn" onclick="assessment.startAssessment()">เริ่มทำแบบประเมิน</button>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessmentSection" class="hidden">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="question-counter" id="questionCounter">คำถามที่ 1 จาก 20</div>
+
+            <div id="assessmentContainer">
+                <!-- Questions will be populated here -->
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsContainer" class="results-container hidden">
+            <h2>ผลการประเมินโปรไฟล์ DISC ของคุณ</h2>
+            <div class="disc-chart" id="discChart"></div>
+            <div id="primaryType" class="primary-type"></div>
+            <div id="characteristicsSection" class="characteristics-section"></div>
+            <div class="traits-grid" id="traitsGrid"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="restart-btn" onclick="assessment.restartAssessment()">🔄 ทำแบบประเมินใหม่</button>
+            </div>
+        </div>
+    </div>
+
+    
